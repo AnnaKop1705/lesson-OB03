@@ -130,3 +130,10 @@ keeper.feed_animal(mam1)
 vet.heal_animal(bird1)
 
 zoo.save_state('zoo_state.pkl')
+
+keeper2 = Zookeeper('Федя')
+zoo.add_staff(keeper2)
+zoo.print_staff_list()
+
+loaded_zoo = Zoo.load_state('zoo_state.pkl')
+loaded_zoo.print_staff_list()
