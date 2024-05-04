@@ -1,3 +1,5 @@
+import pickle
+
 class Animal():
     def __init__(self, name, age, food, sound):
         self.name = name
@@ -64,6 +66,18 @@ class Zoo():
         for animal in self.animals:
             print(f'Название: {animal.name}; Возраст: {animal.age}; Еда: {animal.food}')
 
+    def save_state(self, filename):
+        with open(filename, 'wb') as file:
+            pickle.dump(self, file)
+        print(f'Информация о зоопарке "{self.zoo_name}" сохранена в файл {filename}')
+
+    @staticmethod
+    def load_state(filename):
+        with open(filename, 'rb') as file:
+            zoo = pickle.load(file)
+        print(f'Информация о зоопарке "{zoo.zoo_name}" загружена из файла {filename}')
+        return zoo
+
 class Zookeeper():
     def __init__(self, staffer_name, post='Смотритель зоопарка'):
         self.staffer_name = staffer_name
@@ -114,3 +128,5 @@ animal_sound(zoo.animals)
 keeper.feed_animal(mam1)
 
 vet.heal_animal(bird1)
+
+zoo.save_state('zoo_state.pkl')
